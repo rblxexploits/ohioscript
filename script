@@ -1,0 +1,104 @@
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Library.CreateLib("Ohio GUI", "DarkTheme")
+
+
+--Main
+local Tab = Window:NewTab("Main")
+local Section = Tab:NewSection("Teleports")
+
+Section:NewButton("Bank", "Teleports to bank", function()
+    local pl = game.Players.LocalPlayer.Character.HumanoidRootPart
+local location = CFrame.new(1085, 7, -433)
+local humanoid = game.Players.LocalPlayer.Character.Humanoid
+humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+wait(0.1)
+pl.CFrame = location
+end)
+
+Section:NewButton("Armory", "Teleports to armory", function()
+    local pl = game.Players.LocalPlayer.Character.HumanoidRootPart
+local location = CFrame.new(668, 6, -657)
+local humanoid = game.Players.LocalPlayer.Character.Humanoid
+humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+wait(0.1)
+pl.CFrame = location
+end)
+
+local Section = Tab:NewSection("Speed")
+Section:NewToggle("Speed", "Changes speed", function(state)
+    if state then
+        -- This walkspeed script is the same as others , but does not change to default speed when you reset. ENJOY !    
+_G.HackedWalkSpeed = 100
+ 
+local Plrs = game:GetService("Players")
+ 
+local MyPlr = Plrs.LocalPlayer
+local MyChar = MyPlr.Character
+ 
+if MyChar then
+local Hum = MyChar.Humanoid
+Hum.Changed:connect(function()
+Hum.WalkSpeed = _G.HackedWalkSpeed
+end)
+Hum.WalkSpeed = _G.HackedWalkSpeed
+end
+ 
+ 
+MyPlr.CharacterAdded:connect(function(Char)
+MyChar = Char
+repeat wait() until Char:FindFirstChild("Humanoid")
+local Hum = Char.Humanoid
+Hum.Changed:connect(function()
+Hum.WalkSpeed = _G.HackedWalkSpeed
+end)
+Hum.WalkSpeed = _G.HackedWalkSpeed
+end)
+ 
+-- end of script :)
+    else
+-- This walkspeed script is the same as others , but does not change to default speed when you reset. ENJOY !    
+_G.HackedWalkSpeed = 18
+ 
+local Plrs = game:GetService("Players")
+ 
+local MyPlr = Plrs.LocalPlayer
+local MyChar = MyPlr.Character
+ 
+if MyChar then
+local Hum = MyChar.Humanoid
+Hum.Changed:connect(function()
+Hum.WalkSpeed = _G.HackedWalkSpeed
+end)
+Hum.WalkSpeed = _G.HackedWalkSpeed
+end
+ 
+ 
+MyPlr.CharacterAdded:connect(function(Char)
+MyChar = Char
+repeat wait() until Char:FindFirstChild("Humanoid")
+local Hum = Char.Humanoid
+Hum.Changed:connect(function()
+Hum.WalkSpeed = _G.HackedWalkSpeed
+end)
+Hum.WalkSpeed = _G.HackedWalkSpeed
+end)
+ 
+-- end of script :)
+    end
+end)
+
+local Tab = Window:NewTab("Combat")
+local Section = Tab:NewSection("Combat")
+Section:NewButton("Aimbot", "Press left control to use", function()
+    loadstring(game:GetObjects('rbxassetid://340856112')[1].Source)()
+ 
+wait()
+ 
+_G.FREE_FOR_ALL = true
+ 
+_G.BIND = 50 -- LEFT CTRL
+_G.ESP_BIND = 52 -- LEFT ALT
+end)
+
+local Tab = Window:NewTab("Credits")
+local Section = Tab:NewSection("made by Addi#4709")
