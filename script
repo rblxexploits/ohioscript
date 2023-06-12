@@ -24,7 +24,8 @@ wait(0.1)
 pl.CFrame = location
 end)
 
-local Section = Tab:NewSection("Speed")
+
+local Section = Tab:NewSection("Player")
 Section:NewToggle("Speed", "Changes speed", function(state)
     if state then
         -- This walkspeed script is the same as others , but does not change to default speed when you reset. ENJOY !    
@@ -87,6 +88,132 @@ end)
     end
 end)
 
+Section:NewButton("Noclip", "go through stuff", function()
+local Workspace = game:GetService("Workspace")
+local CoreGui = game:GetService("CoreGui")
+local Players = game:GetService("Players")
+local Noclip = Instance.new("ScreenGui")
+local BG = Instance.new("Frame")
+local Title = Instance.new("TextLabel")
+local Toggle = Instance.new("TextButton")
+local StatusPF = Instance.new("TextLabel")
+local Status = Instance.new("TextLabel")
+local Credit = Instance.new("TextLabel")
+local Plr = Players.LocalPlayer
+local Clipon = false
+
+Noclip.Name = "Noclip"
+Noclip.Parent = game.CoreGui
+
+BG.Name = "BG"
+BG.Parent = Noclip
+BG.BackgroundColor3 = Color3.new(0.0980392, 0.0980392, 0.0980392)
+BG.BorderColor3 = Color3.new(0.0588235, 0.0588235, 0.0588235)
+BG.BorderSizePixel = 2
+BG.Position = UDim2.new(0.149479166, 0, 0.82087779, 0)
+BG.Size = UDim2.new(0, 210, 0, 127)
+BG.Active = true
+BG.Draggable = true
+
+Title.Name = "Title"
+Title.Parent = BG
+Title.BackgroundColor3 = Color3.new(0.266667, 0.00392157, 0.627451)
+Title.BorderColor3 = Color3.new(0.180392, 0, 0.431373)
+Title.BorderSizePixel = 2
+Title.Size = UDim2.new(0, 210, 0, 33)
+Title.Font = Enum.Font.Highway
+Title.Text = "Noclip"
+Title.TextColor3 = Color3.new(1, 1, 1)
+Title.FontSize = Enum.FontSize.Size32
+Title.TextSize = 30
+Title.TextStrokeColor3 = Color3.new(0.180392, 0, 0.431373)
+Title.TextStrokeTransparency = 0
+
+Toggle.Parent = BG
+Toggle.BackgroundColor3 = Color3.new(0.266667, 0.00392157, 0.627451)
+Toggle.BorderColor3 = Color3.new(0.180392, 0, 0.431373)
+Toggle.BorderSizePixel = 2
+Toggle.Position = UDim2.new(0.152380958, 0, 0.374192119, 0)
+Toggle.Size = UDim2.new(0, 146, 0, 36)
+Toggle.Font = Enum.Font.Highway
+Toggle.FontSize = Enum.FontSize.Size28
+Toggle.Text = "Toggle"
+Toggle.TextColor3 = Color3.new(1, 1, 1)
+Toggle.TextSize = 25
+Toggle.TextStrokeColor3 = Color3.new(0.180392, 0, 0.431373)
+Toggle.TextStrokeTransparency = 0
+
+StatusPF.Name = "StatusPF"
+StatusPF.Parent = BG
+StatusPF.BackgroundColor3 = Color3.new(1, 1, 1)
+StatusPF.BackgroundTransparency = 1
+StatusPF.Position = UDim2.new(0.314285725, 0, 0.708661377, 0)
+StatusPF.Size = UDim2.new(0, 56, 0, 20)
+StatusPF.Font = Enum.Font.Highway
+StatusPF.FontSize = Enum.FontSize.Size24
+StatusPF.Text = "Status:"
+StatusPF.TextColor3 = Color3.new(1, 1, 1)
+StatusPF.TextSize = 20
+StatusPF.TextStrokeColor3 = Color3.new(0.333333, 0.333333, 0.333333)
+StatusPF.TextStrokeTransparency = 0
+StatusPF.TextWrapped = true
+
+Status.Name = "Status"
+Status.Parent = BG
+Status.BackgroundColor3 = Color3.new(1, 1, 1)
+Status.BackgroundTransparency = 1
+Status.Position = UDim2.new(0.580952346, 0, 0.708661377, 0)
+Status.Size = UDim2.new(0, 56, 0, 20)
+Status.Font = Enum.Font.Highway
+Status.FontSize = Enum.FontSize.Size14
+Status.Text = "off"
+Status.TextColor3 = Color3.new(0.666667, 0, 0)
+Status.TextScaled = true
+Status.TextSize = 14
+Status.TextStrokeColor3 = Color3.new(0.180392, 0, 0.431373)
+Status.TextWrapped = true
+Status.TextXAlignment = Enum.TextXAlignment.Left
+
+Credit.Name = "Credit"
+Credit.Parent = BG
+Credit.BackgroundColor3 = Color3.new(1, 1, 1)
+Credit.BackgroundTransparency = 1
+Credit.Position = UDim2.new(0.195238099, 0, 0.866141737, 0)
+Credit.Size = UDim2.new(0, 128, 0, 17)
+Credit.Font = Enum.Font.SourceSans
+Credit.FontSize = Enum.FontSize.Size18
+Credit.Text = "Created by KingLuna"
+Credit.TextColor3 = Color3.new(1, 1, 1)
+Credit.TextSize = 16
+Credit.TextStrokeColor3 = Color3.new(0.196078, 0.196078, 0.196078)
+Credit.TextStrokeTransparency = 0
+Credit.TextWrapped = true
+
+Toggle.MouseButton1Click:connect(function()
+	if Status.Text == "off" then
+		Clipon = true
+		Status.Text = "on"
+		Status.TextColor3 = Color3.new(0,185,0)
+		Stepped = game:GetService("RunService").Stepped:Connect(function()
+			if not Clipon == false then
+				for a, b in pairs(Workspace:GetChildren()) do
+                if b.Name == Plr.Name then
+                for i, v in pairs(Workspace[Plr.Name]:GetChildren()) do
+                if v:IsA("BasePart") then
+                v.CanCollide = false
+                end end end end
+			else
+				Stepped:Disconnect()
+			end
+		end)
+	elseif Status.Text == "on" then
+		Clipon = false
+		Status.Text = "off"
+		Status.TextColor3 = Color3.new(170,0,0)
+	end
+end)
+end)
+
 local Tab = Window:NewTab("Combat")
 local Section = Tab:NewSection("Combat")
 Section:NewButton("Aimbot", "Press left control to use", function()
@@ -99,6 +226,119 @@ _G.FREE_FOR_ALL = true
 _G.BIND = 50 -- LEFT CTRL
 _G.ESP_BIND = 52 -- LEFT ALT
 end)
+
+Section:NewButton("ESP", "See players", function()
+--[[
+Script: ESP Script
+Details: Nothing much. Its ESP Chams and the different colors are for different teams.
+Creds: idk
+]]
+-- -----------------------------------
+--  ___      _   _   _              --
+-- / __| ___| |_| |_(_)_ _  __ _ ___--
+-- \__ \/ -_)  _|  _| | ' \/ _` (_-<--
+-- |___/\___|\__|\__|_|_||_\__, /__/--
+--                         |___/    --
+-- -----------------------------------
+-- -----------------------------------
+								ALLYCOLOR = {0,255,255}  	--//Color of the ESP  of people on the same team
+								ENEMYCOLOR =  {255,0,0} 	--//Color of the ESP  of people on NOT the same team
+								TRANSPARENCY = 0.5			--//Transparency of the ESP
+								HEALTHBAR_ACTIVATED = true 	--//Renders the Healthbar
+--
+--
+
+--							!!!Don't Change Anything Below Here Unless You Know What You're Doing!!!
+
+function createFlex()
+-- -----------------------------------------------------------------------------------
+--[VARIABLES] //Changing may result in Errors!
+players = game:GetService("Players") --//Required for PF
+faces = {"Front","Back","Bottom","Left","Right","Top"} --//Every possible Enum face
+currentPlayer = nil --//Used for the Team-Check
+lplayer = players.LocalPlayer --//The LocalPlayer
+-- -----------------------------------------------------------------------------------
+players.PlayerAdded:Connect(function(p)
+	currentPlayer = p
+		p.CharacterAdded:Connect(function(character) --//For when a new Player joins the game 
+			createESP(character)			
+		end)		
+end)
+-- -----------------------------------------------------------------------------------
+function checkPart(obj)  if (obj:IsA("Part") or obj:IsA("MeshPart")) and obj.Name~="HumanoidRootPart" then return true end end --//Check if the Part is suitable 
+-- -----------------------------------------------------------------------------------
+function actualESP(obj) 
+	
+	for i=0,5 do
+		surface = Instance.new("SurfaceGui",obj) --//Creates the SurfaceGui
+		surface.Face = Enum.NormalId[faces[i+1]] --//Adjusts the Face and chooses from the face table
+		surface.AlwaysOnTop = true
+
+		frame = Instance.new("Frame",surface)	--//Creates the viewable Frame
+		frame.Size = UDim2.new(1,0,1,0)
+		frame.BorderSizePixel = 0												
+		frame.BackgroundTransparency = TRANSPARENCY
+			if currentPlayer.Team == players.LocalPlayer.Team then --//Checks the Players Team
+					frame.BackgroundColor3 = Color3.new(ALLYCOLOR[1],ALLYCOLOR[2],ALLYCOLOR[3])	--//If in same Team											
+			else
+				frame.BackgroundColor3 = Color3.new(ENEMYCOLOR[1],ENEMYCOLOR[2],ENEMYCOLOR[3])	--//If in another Team
+			end
+															
+	end
+end
+-- -----------------------------------------------------------------------------------
+function createHealthbar(hrp) 
+	board =Instance.new("BillboardGui",hrp) --//Creates the BillboardGui with HumanoidRootPart as the Parent
+	board.Name = "total"
+	board.Size = UDim2.new(1,0,1,0)
+	board.StudsOffset = Vector3.new(3,1,0)
+	board.AlwaysOnTop = true
+
+	bar = Instance.new("Frame",board) --//Creates the red background
+	bar.BackgroundColor3 = Color3.new(255,0,0)
+	bar.BorderSizePixel = 0
+	bar.Size = UDim2.new(0.2,0,4,0)
+	bar.Name = "total2"
+												
+	health = Instance.new("Frame",bar) --//Creates the changing green Frame
+	health.BackgroundColor3 = Color3.new(0,255,0)
+	health.BorderSizePixel = 0
+	health.Size = UDim2.new(1,0,hrp.Parent.Humanoid.Health/100,0)
+		hrp.Parent.Humanoid.Changed:Connect(function(property) --//Triggers when any Property changed
+			hrp.total.total2.Frame.Size = UDim2.new(1,0,hrp.Parent.Humanoid.Health/100,0) --//Adjusts the size of the green Frame								
+		end)
+end
+-- -----------------------------------------------------------------------------------
+function createESP(c) --//Checks and calls the proper function
+	bugfix = c:WaitForChild("Head") --// *Used so the children of the character arent nil.
+	for i,v in pairs(c:GetChildren()) do
+		if checkPart(v) then
+		actualESP(v)
+		end
+	end
+	if HEALTHBAR_ACTIVATED then --//If the user decided to
+		createHealthbar(c:WaitForChild("HumanoidRootPart")) --//Calls the function of the creation
+	end
+end
+-- -----------------------------------------------------------------------------------
+for i,people in pairs(players:GetChildren())do
+	if people ~= players.LocalPlayer then
+		currentPlayer = people
+																--//Used for Players already in the Game
+		createESP(people.Character)
+			people.CharacterAdded:Connect(function(character)
+				createESP(character)			
+			end)
+	end
+end
+-- -----------------------------------------------------------------------------------
+end --//End of the entire function
+
+createFlex() --// Does exactly that :)
+end)
+
+local Tab = Window:NewTab("Autofarm")
+local Section = Tab:NewSection("Autofarm not done yet")
 
 local Tab = Window:NewTab("Credits")
 local Section = Tab:NewSection("made by Addi#4709")
